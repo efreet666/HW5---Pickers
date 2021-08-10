@@ -101,9 +101,9 @@ class SecondViewController: UIViewController {
                     
                     //save func
                     self.delegate?.createNewItem(name: self.nameTextField.text!, date: self.dateTextField.text!, age: self.ageTextField.text!, gender: self.gendersTextField.text!, instagram: self.instagramTextField.text!)
-                    
-                    Model.init(personName: self.nameTextField.text!, personDate: self.dateTextField.text!, personAge: self.ageTextField.text!, personGender: self.gendersTextField.text!, inst: self.instagramTextField.text!)
-                    
+//                    
+//                    Model.init(personName: self.nameTextField.text!, personDate: self.dateTextField.text!, personAge: self.ageTextField.text!, personGender: self.gendersTextField.text!, inst: self.instagramTextField.text!)
+//                    
                     self.dismiss(animated: true, completion: nil)
                 }
                 

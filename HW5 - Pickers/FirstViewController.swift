@@ -19,21 +19,28 @@ class FirstViewController: UIViewController {
         let secondViewController =
          storyB.instantiateViewController(withIdentifier:
          "SecondViewController") as! SecondViewController
+        
         secondViewController.delegate = self
+        
          self.present(secondViewController, animated: true, completion: nil)
         
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        if birthdays.count != 0{
-            addBirthdayView()
-        }
+        
+       
+    }
+    func update(){
+        print(birthdays.count)
+    if birthdays.count != 0{
+        addBirthdayView(birthday: birthdays)
+    }
     }
     @IBAction func backButton(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    func addBirthdayView(){
+    func addBirthdayView(birthday: [Model]){
         var i = 0
     let view = UIView()
     view.frame = CGRect(x: 0, y: 90, width: self.view.frame.width, height: 120)
@@ -42,7 +49,7 @@ class FirstViewController: UIViewController {
         
     let nameLabel = UILabel()
     nameLabel.frame = CGRect(x: 0, y: 5, width: 40, height: 10)
-        nameLabel.text = ""
+        nameLabel.text = birthdays[i].name
         self.view.addSubview(nameLabel)
         i += 1
     }
@@ -51,6 +58,6 @@ extension FirstViewController: newItemDelegate{
      func createNewItem(name: String, date: String, age: String, gender: String, instagram: String) {
         
        birthdays.append(Model.init(personName: name, personDate: date, personAge: age, personGender: gender, inst: instagram))
-        
+        update()
     }
 }
