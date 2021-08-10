@@ -21,7 +21,7 @@ class SecondViewController: UIViewController {
     let agePicker = UIPickerView()
     let genderPicker = UIPickerView()
     
-    let genders = ["Мужчина", "Женщина"]
+    let genders = ["Женщина", "Мужчина"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +70,11 @@ class SecondViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMM yyyy"
         dateTextField.text = formatter.string(from: datePicker.date)
+        
+        let formated2 = DateFormatter()
+        formated2.dateFormat = "d MMMM, EEEE"
+        let formatedDate = formated2.string(from: datePicker.date)
+        delegate.formatedDate(date: formatedDate, formatedDate: datePicker.date)
     }
     //pickerView
     @objc func doneAction2(){
@@ -101,9 +106,7 @@ class SecondViewController: UIViewController {
                     
                     //save func
                     self.delegate?.createNewItem(name: self.nameTextField.text!, date: self.dateTextField.text!, age: self.ageTextField.text!, gender: self.gendersTextField.text!, instagram: self.instagramTextField.text!)
-//                    
-//                    Model.init(personName: self.nameTextField.text!, personDate: self.dateTextField.text!, personAge: self.ageTextField.text!, personGender: self.gendersTextField.text!, inst: self.instagramTextField.text!)
-//                    
+
                     self.dismiss(animated: true, completion: nil)
                 }
                 
