@@ -41,8 +41,10 @@ class SecondViewController: UIViewController {
         
         //datapicker
         dateTextField.inputView = datePicker
+        datePicker.locale = Locale.autoupdatingCurrent
         datePicker.datePickerMode = .date
-        datePicker.locale = Locale(identifier: "Russia")
+        let loc = Locale(identifier: "Russia")
+        datePicker.locale = loc
         datePicker.preferredDatePickerStyle = .wheels
         dateTextField.inputAccessoryView = toolbar
         
@@ -59,6 +61,8 @@ class SecondViewController: UIViewController {
         genderPicker.dataSource = self
         genderPicker.delegate = self
         gendersTextField.inputAccessoryView = toolbar2
+        
+        instagramTextField.addTarget(self, action: #selector(instAlert), for: .editingDidBegin)
        
     }
     //Datepicker
@@ -72,9 +76,9 @@ class SecondViewController: UIViewController {
         dateTextField.text = formatter.string(from: datePicker.date)
         
         let formated2 = DateFormatter()
-        formated2.dateFormat = "d MMMM, EEEE"
+        formated2.dateFormat = "d MMMM"
         let formatedDate = formated2.string(from: datePicker.date)
-        delegate.formatedDate(date: formatedDate, formatedDate: datePicker.date)
+        delegate.formatedDate(date: dateTextField.text!, formatedDate: formatedDate)
     }
     //pickerView
     @objc func doneAction2(){
@@ -125,6 +129,25 @@ class SecondViewController: UIViewController {
             let action = UIAlertAction(title: "OK", style: .default) { (action) in
         
             }
+            alertController.addAction(action)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    
+     @objc func instAlert(){
+        
+        let alertController = UIAlertController(title: "Введите username Instagram", message: "", preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: "OK", style: .default) { (action) in
+                if self.instagramTextField.text == ""{
+                    self.instagramTextField.text = alertController.textFields?.first?.text
+                } else {
+                    self.errorAlert(title: "Ошибка", message: "Введите корректные данные", style: .alert)
+                }
+            }
+        let cancel = UIAlertAction(title: "Отмена", style: .default)
+        
+            alertController.addTextField(configurationHandler: nil)
+            alertController.addAction(cancel)
             alertController.addAction(action)
             self.present(alertController, animated: true, completion: nil)
         }
